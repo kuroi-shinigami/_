@@ -153,3 +153,5 @@ pip-selfcheck.json
 /_.py
 _
 /conf/
+
+# Project-specific paths

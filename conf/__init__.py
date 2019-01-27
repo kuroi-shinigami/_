@@ -19,4 +19,12 @@ else:
 
 print('Considered {} envirnment'.format(env))
 
-__import__('{}'.format(env.lower()), globals(), locals())
+environment = importlib.import_module('{}'.format(env.lower()))
+
+module_dict = environment.__dict__
+try:
+    to_import = environment.__all__
+except AttributeError:
+    to_import = [name for name in module_dict if not name.startswith('_')]
+
+globals().update({name: module_dict[name] for name in to_import})
